@@ -1,0 +1,68 @@
+@extends('dashboard.layouts.master')
+@section('contents')
+<div class="row">
+    <div class="col-12">
+        
+        @if(Session::has('error'))
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Opps!</strong> {{ Session::get('error') }}
+            </div>
+        @endif
+        
+        @error('album')
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Opps!</strong> {{ $message }}
+            </div>
+        @enderror
+        
+        
+        @if(Session::has('success'))
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Great!</strong> {{ Session::get('success') }}
+            </div>
+        @endif
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <h5 class="card-header">Manage Content Two</h5>
+    
+                <div class="card-body">                    
+                    <form action="{{ route('content.two.insert') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group mb-3">
+                                    <label>Content Title</label>
+                                    <input type="text" name="title" class="form-control" value="{{ $content->title }}" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Content Sub Title</label>
+                                    <input type="text" name="sub_title" class="form-control" value="{{ $content->sub_title }}" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Content Content</label>
+                                    <textarea name="content" class="form-control" required>{{ $content->content }}</textarea>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label>Content Button Text</label>
+                                    <input type="text" name="button_text" class="form-control" value="{{ $content->button_text }}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-right">
+                                    <button class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
